@@ -1,0 +1,152 @@
+body,
+div#main > ul {
+  margin: 0;
+  padding: 0;
+}
+div#main {
+  position: relative;
+  width: 1000px;
+  height: 600px;
+  overflow: hidden;
+  line-height: 16px;
+  margin: 0 auto;
+  z-index: 98;
+}
+div#main > ul {
+  position: relative;
+  width: 1000px;
+  height: 600px;
+  overflow: hidden;
+  line-height: 16px;
+}
+div#main > ul > li {
+  background: none;
+  color: #ffffff;
+  line-height: 16px;
+  position: absolute;
+  width: 1000px;
+  height: 600px;
+  overflow: hidden;
+  line-height: 600px;
+  background: red;
+  text-align: center;
+  display: none;
+}
+div#main > ul > li > a {
+  display: block;
+}
+div#main div {
+  position: absolute;
+  width: 1000px;
+  height: 10px;
+  overflow: none;
+  line-height: 16px;
+  bottom: 20px;
+  line-height: 10px;
+  z-index: 999;
+}
+div#main div ul {
+  margin: 0;
+  padding: 0;
+  width: 150px;
+  height: 10px;
+  background: none;
+  color: #ffffff;
+  line-height: 16px;
+  line-height: 10px;
+  margin: 0 auto;
+}
+div#main div ul > li {
+  margin: 0;
+  padding: 0;
+  border: none;
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: #cccccc;
+  color: #ffffff;
+  line-height: 16px;
+  border-radius: 10px;
+  margin-right: 5px;
+  line-height: 10px;
+}
+div#main div#float_left {
+  position: absolute;
+  width: 0px;
+  height: 600px;
+  overflow: none;
+  line-height: 16px;
+  left: 0px;
+  z-index: 5;
+  background: rgba(55, 199, 105, 0.4);
+}
+div#main div#float_right {
+  position: absolute;
+  width: 0px;
+  height: 600px;
+  overflow: none;
+  line-height: 16px;
+  z-index: 5;
+  right: 0px;
+  background: rgba(235, 38, 19, 0.5);
+}
+@keyframes style {
+  0% {
+    width: 0px;
+    height: 0px;
+  }
+  10% {
+    width: 1000px;
+    height: 600px;
+  }
+}
+@keyframes ss {
+  0% {
+    width: 0px;
+  }
+  100% {
+    width: 500px;
+  }
+}
+@keyframes rr {
+  0% {
+    transform: scale(1, 1);
+  }
+  100% {
+    transform: scale(0, 0);
+  }
+}
+@keyframes aa {
+  0% {
+    margin-left: 0px;
+    margin-top: 0px;
+  }
+  15% {
+    margin-left: 15px;
+    margin-top: 200px;
+  }
+  50% {
+    margin-left: 0px;
+    margin-top: 400px;
+  }
+  70% {
+    margin-left: 40px;
+    margin-top: 650px;
+  }
+  100% {
+    margin-left: 20px;
+    margin-top: 900px;
+  }
+}
+.style {
+  animation: style 5s;
+}
+.float_ss {
+  animation: ss 2s ;
+}
+.ww {
+  animation: rr 2s;
+}
+.aa {
+  animation: aa 50s linear 1s infinite ;
+}

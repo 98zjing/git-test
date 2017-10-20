@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<!-- <script src="demo.js"></script> -->
+	<!-- <script src="dome2.js"></script> -->
+</head>
+<body>
+	<div id="s">
+		我是DIV1
+		<ul>
+			我是UL
+			<li class="a">
+				我是LI
+			</li>
+		</ul>
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+		<li>4</li>
+		<p>
+			dsaf
+		</p>
+	</div>
+	<div id="d">
+		我是DIV2
+		<ul>
+			我是UL
+			<li class="a">
+				我是LI
+				<p>sfa
+					<li>
+						<div>7777</div>
+						<a href="">55555</a>
+					</li>
+				</p>
+
+			</li>
+		</ul>
+		<p>1</p>
+		<p>2</p>
+		<p>3</p>
+		<ul><p>5</p></ul>
+	</div>
+	<div id="g">
+		我是DIV3
+		<ul id="x">
+			我是UL
+			<li class="e">
+				我是LI
+				<p>sfas</p>
+			</li>
+		</ul>
+		<ul>1</ul>
+		<ul>2</ul>
+		<ul>3</ul>
+	</div>
+	<script>
+		var $=function(ages){
+			return new Box(ages);
+		}
+		function Box(ages){
+			this.arguments=[];
+			this.parentNode=[];
+			if (typeof ages=="string") {
+				var nums=ages.split(' ');
+				var ss=[];
+				for (var i = 0; i < nums.length; i++) {
+					switch (nums[i].charAt(0)) {
+						case "#" : 
+							ss=[];
+							if (!i) {
+								ss.push(this.ID(nums[i].slice(1)));
+								this.parentNode=ss;
+							}
+							else {
+								ss.push(this.ID(nums[i].slice(1),this.parentNode[0]));
+								this.parentNode=ss;
+							}
+							break;
+						case ".":
+							ss=[];
+							if (!i) {
+								ss.push(this.class(nums[i].slice(1)));
+								this.parentNode=ss;
+							}
+							else{
+								ss.push(this.class(nums[i].slice(1),this.parentNode[0]));
+								this.parentNode=ss;
+							}
+							break;
+						default:
+							ss=[]; 	
+							if (!i) {
+								ss.push(this.TagName(nums[i]));
+								this.parentNode=ss;
+							}
+							else {
+								ss.push(this.TagName(nums[i],this.parentNode[0]));
+								this.parentNode=ss;
+							}
+							break;
+					}
+				}
+			}
+			else if (typeof ages=="object") {
+
+			}
+			this.arguments=ss;
+		}
+		// Box.prototype=document;
+		Box.prototype.ID=function(id,parentNode){
+			var ss=[];
+			if (parentNode) {
+				for (var i = 0; i < parentNode.length; i++) {
+					ss.push(parentNode[i].getElementById(id));
+				}
+			}
+			else {
+				ss.push(document.getElementById(id));
+			}
+			return this.arguments=ss;
+		}
+		Box.prototype.TagName=function(ages,parentNode){
+			var ss=[];
+			if (parentNode) {
+				// alert(parentNode[0][0]);
+				// alert(document.getElementsByTagName(parentNode[0][0].tagName)[0].tagName);
+				for (var i = 0; i < parentNode.length; i++) {
+					var stm=parentNode[i].getElementsByTagName(ages);
+					for (var j = 0; j < stm.length; j++) {
+						ss.push(stm[j]);
+					}
+				}
+			}
+			else {
+				var sum=document.getElementsByTagName(ages);
+				for (var k = 0; k < sum.length; k++) {
+					ss.push(sum[k]);
+				}
+			}
+			this.arguments=ss;
+			return this.arguments;	
+		}
+		Box.prototype.class=function(name,parentNode){
+			var ss=[];
+			if (parentNode) {
+				for (var i = 0; i < this.parentNode[0].length; i++) {
+					var stm=parentNode[0].getElementsByTagName("*");
+					for (var j = 0; j < stm.length; j++) {
+						if (stm[j].className==name) {
+							ss.push(stm[j]);
+						}
+					}
+				}
+			}
+			else{
+				var sum=document.getElementsByTagName('*');
+					for (var i = 0; i < sum.length; i++) {
+						if (sum[i].className==name) {
+							ss.push(sum[i]);
+						}
+					}
+			}
+			this.arguments=ss;
+			return this.arguments; 
+		}
+		Box.prototype.css=function(Css,value){
+			for (var i = 0; i < this.arguments.length; i++) {
+				if (arguments.length==1) {
+					if (typeof window.getComputedStyle=='undefined') {
+						return window.getComputedStyle(this.arguments[0][i],null)[Css];
+					}
+					else{
+						return this.arguments[i].currentStyle(Css);
+					}
+				}
+				else if (arguments.length==2) {
+					this.arguments[0][i].style[Css]=value;
+				}
+			}
+			return this;
+		}
+	$("#d .a p").css('color','blue');
+	</script>
+</body>
+</html>
